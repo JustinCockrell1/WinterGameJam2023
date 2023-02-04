@@ -59,13 +59,13 @@ let lastTotalElapsedTime = 0;
         //subtract the angle from the player angle
         ballAngle*=180/Math.PI;
         const change1 = angle - ballAngle;
-        const change2 = ballAngle - angle;
+        const change2 = (360-angle) + (360-ballAngle);
         let change;
         if(Math.abs(change1) < Math.abs(change2)){
           change = change1;
           
         }else {
-          change = change2;
+          change = -change2;
         }
 
 
@@ -77,7 +77,7 @@ let lastTotalElapsedTime = 0;
 
         // console.log(vx, vy, change, angle, ballAngle);
         //update the player angle
-        ballAngle+=(change/100);
+        ballAngle+=(change/10);
         ballAngle=wrapTo360(ballAngle);
         ballAngle*=Math.PI/180;
         vy = Math.sin(ballAngle);
