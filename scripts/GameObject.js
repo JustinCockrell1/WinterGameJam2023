@@ -6,8 +6,8 @@ export default class GameObject {
         this.h = 1;
     }
 
-    tick();
+    tick(){}
 
-    render();
+    render(){}
 
 }
