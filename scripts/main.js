@@ -6,3 +6,15 @@ window.addEventListener("gamepadconnected", (e) => {
     gp.index, gp.id,
     gp.buttons.length, gp.axes.length);
   });
+
+
+
+
+
+  function gameLoop() {
+
+  }
+
+  function draw() {
+    
+  }
