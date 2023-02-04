@@ -3,7 +3,7 @@ let ctx;
 
 let ballX = 10;
 let ballY = 10;
-let ballAngle = 180;
+let ballAngle = 1;
 
 window.addEventListener("gamepadconnected", (e) => {
     gamePadIndex = e.gamepad.index;
@@ -58,7 +58,16 @@ let lastTotalElapsedTime = 0;
 
         //subtract the angle from the player angle
         ballAngle*=180/Math.PI;
-        const change = angle - ballAngle;
+        const change1 = angle - ballAngle;
+        const change2 = ballAngle - angle;
+        let change;
+        if(Math.abs(change1) < Math.abs(change2)){
+          change = change1;
+          
+        }else {
+          change = change2;
+        }
+
 
    
         document.getElementById("change").innerHTML = change;
