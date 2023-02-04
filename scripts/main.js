@@ -1,20 +1,52 @@
-alert("hello");
-
+let gamePadIndex =-1;
+let ctx;
 window.addEventListener("gamepadconnected", (e) => {
-    const gp = navigator.getGamepads()[e.gamepad.index];
+    gamePadIndex = e.gamepad.index;
+    gp = navigator.getGamepads()[e.gamepad.index];
     console.log("Gamepad connected at index %d: %s. %d buttons, %d axes.",
     gp.index, gp.id,
     gp.buttons.length, gp.axes.length);
+    console.log(gp.buttons);
+  });
+
+
+  window.addEventListener("gamepaddisconnected", (e) => {
+    console.log("Gamepad disconnected from index %d: %s",
+      e.gamepad.index, e.gamepad.id);
+      gamePadIndex = -1;
   });
 
 
 
+let lastTotalElapsedTime = 0;
+//Main Game Loop
+  function gameLoop(totalElapsedTime) {
+    //get the time past since the last animation frame and save it in elapsed time
+    const elapsedTime = totalElapsedTime - lastTotalElapsedTime;
+
+    //Pull in the current state of the controller
+    if(gamePadIndex!=-1) {
+    const gamePad = navigator.getGamepads()[gamePadIndex];
+
+    console.log(gamePad.axes[0], gamePad.axes[1]);
+    }
 
 
-  function gameLoop() {
-
+    window.requestAnimationFrame(gameLoop);
   }
 
   function draw() {
     
+  }
+
+
+  
+
+  window.onload = function() {
+    const canvas = document.getElementById("canvas");
+    ctx = canvas.getContext("2d");
+    ctx.canvas.width = 600;
+    ctx.canvas.height = 600;
+    ctx.fillRect(0,0, ctx.canvas.width, ctx.canvas.height); 
+    window.requestAnimationFrame(gameLoop);  
   }
