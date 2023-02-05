@@ -85,12 +85,16 @@ export default class Root extends GameObject {
     }
 
 
-    collision(object) {
+    collision(object, game) {
         console.log("root hit ", object.type);
         if(object.type=="rock") {
             this.x = 500;
             this.y=0;
             this.parts = [];
+        }
+        else if(object.type=="water") {
+            console.log(game.gameSpeed);
+            game.gameSpeed = 0.1;
         }
     }
 }

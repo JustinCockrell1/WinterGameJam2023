@@ -24,6 +24,8 @@ export default class DigDownRoot {
 
         this.camera = new Camera();
 
+        this.gameSpeed = 1;
+
         this.setupEvents();
 
         this.keyboardVelocity = {x:0,y:0};
@@ -96,8 +98,9 @@ export default class DigDownRoot {
 
     gameLoop(totalElapsedTime) {
         //get the time past since the last animation frame and save it in elapsed time
-        const elapsedTime = (totalElapsedTime - this.lastTotalElapsedTime)/1000;
+        let elapsedTime = (totalElapsedTime - this.lastTotalElapsedTime)/1000;
         this.lastTotalElapsedTime = totalElapsedTime;
+        elapsedTime*=this.gameSpeed;
         this.tick(elapsedTime);
         this.render(this.ctx);
     
@@ -126,7 +129,7 @@ export default class DigDownRoot {
 
     tick(elapsedTime) {
 
-let gamePad = {buttons:[], axes:[]};
+        let gamePad = {buttons:[], axes:[]};
         if(this.gamePadIndex!=-1) {
             gamePad = navigator.getGamepads()[this.gamePadIndex];
             // console.log(gamePad.axes[0], gamePad.axes[1]);
@@ -160,8 +163,8 @@ let gamePad = {buttons:[], axes:[]};
                             
                             
                             ) {
-                            this.gameObjects[i].collision(this.gameObjects[j]);
-                            this.gameObjects[j].collision(this.gameObjects[i]);
+                            this.gameObjects[i].collision(this.gameObjects[j]), this;
+                            this.gameObjects[j].collision(this.gameObjects[i], this);
                         }
                     }
                 }
