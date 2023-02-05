@@ -17,7 +17,7 @@ export default class Water extends GameObject {
     tick(elapsedTime, gamePad, game) {
         if(this.y-game.camera.y<-this.h) {
             this.x = Math.random()*1000;
-            this.y = Math.random()*1000 + game.camera.y+game.ctx.canvas.height;
+            this.y = Math.random()*1000 + game.camera.y+game.ctx.canvas.height+100;
             this.full=true;
         }
     }

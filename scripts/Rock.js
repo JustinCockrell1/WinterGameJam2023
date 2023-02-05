@@ -21,7 +21,7 @@ export default class Rock extends GameObject {
     respawn(game) {
         
             this.x = Math.random()*1000;
-            this.y = Math.random()*1000 + game.camera.y+game.ctx.canvas.height;
+            this.y = Math.random()*1000 + game.camera.y+game.ctx.canvas.height+100;
      
     }
 
