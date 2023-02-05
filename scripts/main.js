@@ -1,18 +1,8 @@
 import DigDownRoot from "./DigDownRoot.js";
 
 
+    let game = new DigDownRoot();
 
-
-
-
-
-
-
-let game = new DigDownRoot();
-
-
-
-  
 
   window.onload = function() {
     const canvas = document.getElementById("canvas");

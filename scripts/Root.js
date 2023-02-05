@@ -8,6 +8,9 @@ export default class Root extends GameObject {
         super(x, y);
         this.angle = 180;
         this.speed = 200;
+
+        this.parts = [];
+        this.numParts = 100;
     }
 
     tick(elapsedTime, gamePad) {
@@ -56,6 +59,8 @@ export default class Root extends GameObject {
         document.getElementById("vy").innerHTML = vy;
        
     
+        this.parts.push({x:this.x, y:this.y});
+
         this.x+=(vx * elapsedTime) * this.speed;
         this.y+=(vy * elapsedTime) * this.speed;
     }
@@ -63,5 +68,9 @@ export default class Root extends GameObject {
     render(ctx) {
         ctx.fillStyle = "red";
         ctx.fillRect(this.x, this.y, 15, 15);
+        for(let i = 0; i < this.parts.length; i++) {
+            ctx.fillRect(this.parts[i].x, this.parts[i].y, 15, 15);
+        }
+        console.log(this.parts.length);
     }
 }
