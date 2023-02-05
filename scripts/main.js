@@ -13,4 +13,5 @@ import DigDownRoot from "./DigDownRoot.js";
     ctx.fillRect(0,0, ctx.canvas.width, ctx.canvas.height); 
      game.ctx = ctx;
      game.startGame();
+     
   }

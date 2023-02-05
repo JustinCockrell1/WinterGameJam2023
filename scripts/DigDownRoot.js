@@ -6,6 +6,7 @@ import Camera from "./Camera.js";
 import Water from "./Water.js";
 import Rock from "./Rock.js";
 import Ice from "./Ice.js";
+import Sound from "./Sound.js";
 
 export default class DigDownRoot {
 
@@ -112,10 +113,11 @@ export default class DigDownRoot {
     
         window.requestAnimationFrame((totalElapsedTime)=>this.gameLoop(totalElapsedTime));
       }
-
+      
       startGame() {
 
-
+        this.myMusic = new Sound("./assets/sounds/ingamemusic.mp3");
+        this.myMusic.play();
       
         this.addGameObject(new Background(0,this.ctx.canvas.height));
         this.addGameObject(new Background(0,this.ctx.canvas.height*2));
