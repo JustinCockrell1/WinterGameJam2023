@@ -71,6 +71,5 @@ export default class Root extends GameObject {
         for(let i = 0; i < this.parts.length; i++) {
             ctx.fillRect(this.parts[i].x, this.parts[i].y, 15, 15);
         }
-        console.log(this.parts.length);
     }
 }
