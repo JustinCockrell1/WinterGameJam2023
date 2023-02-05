@@ -12,8 +12,17 @@ export default class Rock extends GameObject {
        
     }
 
-    tick() {
+    tick(elapsedTime, gamePad, game) {
+        if(this.y-game.camera.y<-this.h) {
+            this.respawn(game);
+        }
+    }
 
+    respawn(game) {
+        
+            this.x = Math.random()*1000;
+            this.y = Math.random()*1000 + game.camera.y+game.ctx.canvas.height;
+     
     }
 
     render(ctx, camera) {

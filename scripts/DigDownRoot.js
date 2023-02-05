@@ -124,15 +124,21 @@ export default class DigDownRoot {
         this.addGameObject(new Ice(0,0));
 
         for(let i = 0; i < 20; i++) {
-        this.addGameObject(new Rock(Math.random()*600, Math.random()*1000+1000));
-        this.addGameObject(new Water(Math.random()*600, Math.random()*1000+1000));
+        this.addGameObject(new Rock(Math.random()*600, Math.random()*3000+1000));
+       
         }
+        for(let i = 0; i < 20; i++) {
+        this.addGameObject(new Water(Math.random()*600, Math.random()*3000+1000));
+        }
+
         this.addGameObject(new Root(this.ctx.canvas.width/2,this.ctx.canvas.height/2));
         this.addGameObject(new Title(0,0));
 
         this.gameRunning=false;
-        this.gameOver=false;
+       
+        if(this.gameOver==false)
         window.requestAnimationFrame((elapsedTime)=>{this.gameLoop(elapsedTime)});
+        this.gameOver=false;
       
       }
     
@@ -153,8 +159,12 @@ export default class DigDownRoot {
         // console.log(gamePad.buttons[0]);
         // console.log(this.keyAPressed);
             if(gamePad.buttons[0].pressed===true) {
+
+                if(this.gameOver) {
+                    this.restart();
+                }
+                else 
                 this.gameRunning=true;
-                this.gameOver=false;
             }
 
     
@@ -199,6 +209,11 @@ export default class DigDownRoot {
       for(let i = 0; i < this.gameObjects.length; i++) {
             this.gameObjects[i].render(this.ctx, this.camera);
         }
+    }
+
+    restart(){
+        this.gameObjects = [];
+        this.startGame();
     }
 
 };
