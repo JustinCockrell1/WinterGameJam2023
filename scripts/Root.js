@@ -119,6 +119,9 @@ export default class Root extends GameObject {
             }else{}
             
         }
+        else if(object.type=="ice") {
+            this.gameOver(game);
+        }
     }
     gameOver(game){
             game.gameRunning = false;
