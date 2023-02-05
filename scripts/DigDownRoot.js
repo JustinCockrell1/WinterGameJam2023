@@ -1,6 +1,7 @@
 import GameObject from "./GameObject.js";
 import Root from "./Root.js";
 import Background from "./Background.js";
+import Title from "./Title.js";
 
 export default class DigDownRoot {
 
@@ -59,6 +60,7 @@ export default class DigDownRoot {
 
       
         this.addGameObject(new Background(0,0));
+        this.addGameObject(new Title(0,0));
         this.addGameObject(new Root(50,50));
 
         this.gameRunning=true;

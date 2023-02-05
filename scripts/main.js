@@ -7,8 +7,8 @@ import DigDownRoot from "./DigDownRoot.js";
   window.onload = function() {
     const canvas = document.getElementById("canvas");
     let ctx = canvas.getContext("2d");
-    ctx.canvas.width = 600;
-    ctx.canvas.height = 600;
+    ctx.canvas.width = window.innerHeight-20;
+    ctx.canvas.height = window.innerHeight-20;
     ctx.fillStyle = "grey";
     ctx.fillRect(0,0, ctx.canvas.width, ctx.canvas.height); 
      game.ctx = ctx;
