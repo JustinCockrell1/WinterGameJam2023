@@ -128,7 +128,7 @@ export default class DigDownRoot {
        
         }
         for(let i = 0; i < 20; i++) {
-        this.addGameObject(new Water(Math.random()*600, Math.random()*3000+1000));
+        this.addGameObject(new Water(Math.random()*600, Math.random()*2000+1000));
         }
 
         this.addGameObject(new Root(this.ctx.canvas.width/2,this.ctx.canvas.height/2));
