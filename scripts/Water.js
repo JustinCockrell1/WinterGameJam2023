@@ -3,16 +3,22 @@ import Animation from "./Animation.js";
 
 export default class Water extends GameObject {
     constructor(x,y) {
-        this.x = x;
-        this.y = y;
+        super(x, y);
+        this.w = Math.random()*150+20;
+        this.h = Math.random()*150+20;
+
+        this.animation = new Animation("./assets/images/water1.png");
+
+        this.type="water";
         
     }
     tick() {
 
     }
 
-    render() {
-        // this.animation.render(ctx,)
+    render(ctx, camera) {
+        this.animation.render(ctx, this.x, this.y-camera.y, this.w, this.h);
     }
+
     
 }

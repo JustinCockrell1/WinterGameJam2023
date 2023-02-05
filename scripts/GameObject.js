@@ -4,10 +4,13 @@ export default class GameObject {
         this.y = y;
         this.w = 1;
         this.h = 1;
+        this.type="asd";
     }
 
     tick(){}
 
     render(){}
+
+    collision(){}
 
 }

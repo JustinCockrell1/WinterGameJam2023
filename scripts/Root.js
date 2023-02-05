@@ -4,7 +4,6 @@ import Camera from "./Camera.js";
 import Animation from "./Animation.js";
 
 export default class Root extends GameObject {
-
     constructor(x, y) {
         super(x, y);
         this.angle = 90;
@@ -14,14 +13,13 @@ export default class Root extends GameObject {
         this.numParts = 100;
         this.animation = new Animation("./assets/images/Root.png");
         console.log(this.y, this.x);
+        this.type="root";
     }
 
     tick(elapsedTime, gamePad) {
         let vx = gamePad.axes[0];
         let vy = gamePad.axes[1];
         let pressed = Math.abs(vx) > 0.05 || Math.abs(vy) > 0.05;
-
-        
 
         let cAngle = Math.atan2(vy,vx)*180/Math.PI
         if(cAngle<0) {
@@ -69,10 +67,10 @@ export default class Root extends GameObject {
         this.x+=(vx * elapsedTime) * this.speed;
         this.y+=(vy * elapsedTime) * this.speed;
 
-        // Wall Collision
-        if(this.x < 0 ||this.x > 1000){
-            // Game over screen
-        }
+
+
+
+
         
     }
 
@@ -83,6 +81,16 @@ export default class Root extends GameObject {
         for(let i = 0; i < this.parts.length; i++) {
             // ctx.fillRect(this.parts[i].x, this.parts[i].y, 15, 15);
             this.animation.render(ctx,this.parts[i].x,this.parts[i].y-camera.y,15,15);
+        }
+    }
+
+
+    collision(object) {
+        console.log("root hit ", object.type);
+        if(object.type=="rock") {
+            this.x = 500;
+            this.y=0;
+            this.parts = [];
         }
     }
 }
