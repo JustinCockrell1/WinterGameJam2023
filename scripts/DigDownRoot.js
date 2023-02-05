@@ -5,6 +5,7 @@ import Title from "./Title.js";
 import Camera from "./Camera.js";
 import Water from "./Water.js";
 import Rock from "./Rock.js";
+import Ice from "./Ice.js";
 
 export default class DigDownRoot {
 
@@ -118,6 +119,7 @@ export default class DigDownRoot {
       
         this.addGameObject(new Background(0,this.ctx.canvas.height));
         this.addGameObject(new Background(0,this.ctx.canvas.height*2));
+        this.addGameObject(new Ice(0,0));
 
         for(let i = 0; i < 20; i++) {
         this.addGameObject(new Rock(Math.random()*600, Math.random()*1000+1000));
