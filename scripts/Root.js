@@ -12,7 +12,8 @@ export default class Root extends GameObject {
 
         this.parts = [];
         this.numParts = 100;
-        this.animation = new Animation("./assets/images/Root.png")
+        this.animation = new Animation("./assets/images/Root.png");
+        console.log(this.y, this.x);
     }
 
     tick(elapsedTime, gamePad) {
@@ -56,15 +57,16 @@ export default class Root extends GameObject {
         let rAngle =this.angle*Math.PI/180;
         vy = Math.sin(rAngle);
         vx = Math.cos(rAngle);
-           
+       
+
         document.getElementById("vx").innerHTML = vx;
         document.getElementById("vy").innerHTML = vy;
        
     
         this.parts.push({x:this.x, y:this.y});
-
         this.x+=(vx * elapsedTime) * this.speed;
         this.y+=(vy * elapsedTime) * this.speed;
+        
     }
 
     render(ctx, camera) {

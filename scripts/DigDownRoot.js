@@ -23,6 +23,9 @@ export default class DigDownRoot {
         this.camera = new Camera();
 
         this.setupEvents();
+
+        this.keyboardVelocity = {x:0,y:0};
+        this.keyAPressed = false;
     }
 
     setupEvents() {
@@ -40,6 +43,47 @@ export default class DigDownRoot {
             console.log("Gamepad disconnected from index %d: %s",
               e.gamepad.index, e.gamepad.id);
               this.gamePadIndex = -1;
+          });
+
+
+          window.addEventListener("keydown", (e)=>{
+            if(e.key=="w") {
+                if(this.keyboardVelocity.y!=1) {this.keyboardVelocity.y=-1;}
+                else this.keyboardVelocity.y=0;
+            }
+            else if(e.key=="a"){
+                if(this.keyboardVelocity.x!=1) {this.keyboardVelocity.x=-1;}
+                else {
+                    this.keyboardVelocity.x=0;
+                }
+                this.keyAPressed=true;
+            }
+            else if(e.key=="s") {
+                if(this.keyboardVelocity.y!=-1) this.keyboardVelocity.y=1;
+                else this.keyboardVelocity.y=0;
+            }
+            else if(e.key=="d") {
+                if(this.keyboardVelocity.x!=-1) this.keyboardVelocity.x=1;
+                else this.keyboardVelocity.x=0;
+            }
+          });
+
+          window.addEventListener("keyup", (e)=>{
+            if(e.key=="w") {
+                if(this.keyboardVelocity.y==-1) this.keyboardVelocity.y=0;
+            }
+            else if(e.key=="a"){
+                if(this.keyboardVelocity.x==-1) {
+                    this.keyboardVelocity.x=0;
+                }
+                this.keyAPressed=false;
+            }
+            else if(e.key=="s") {
+                if(this.keyboardVelocity.y==1) this.keyboardVelocity.y=0;
+            }
+            else if(e.key=="d") {
+                if(this.keyboardVelocity.x==1) this.keyboardVelocity.x=0;
+            }
           });
         
     }
@@ -67,19 +111,29 @@ export default class DigDownRoot {
         this.addGameObject(new Title(0,0));
         this.addGameObject(new Root(this.ctx.canvas.width/2,this.ctx.canvas.height/2));
 
-        this.gameRunning=true;
-        this.gameLoop();
+        this.gameRunning=false;
+        window.requestAnimationFrame((elapsedTime)=>{this.gameLoop(elapsedTime)});
 
       
       }
     
 
     tick(elapsedTime) {
-console.log(this.gamePadIndex);
+
+let gamePad = {buttons:[], axes:[]};
         if(this.gamePadIndex!=-1) {
-            const gamePad = navigator.getGamepads()[this.gamePadIndex];
+            gamePad = navigator.getGamepads()[this.gamePadIndex];
             // console.log(gamePad.axes[0], gamePad.axes[1]);
-            if(gamePad.buttons[0].pressed) this.gameRunning=true;
+        }
+        else {
+            gamePad.buttons = [{pressed:this.keyAPressed}];
+            // gamePad.buttons[0]={pressed:this.keyAPressed};
+            gamePad.axes=[this.keyboardVelocity.x, this.keyboardVelocity.y];
+           
+        }
+        // console.log(gamePad.buttons[0]);
+        // console.log(this.keyAPressed);
+            if(gamePad.buttons[0].pressed===true) this.gameRunning=true;
     
             if(this.gameRunning) {
                 for(let i = 0; i < this.gameObjects.length; i++) {
@@ -90,10 +144,11 @@ console.log(this.gamePadIndex);
             }
        
      
-        }
+      
 
     
     }
+
     render() {
         this.ctx.clearRect(0,0,this.ctx.canvas.width, this.ctx.canvas.height);
       for(let i = 0; i < this.gameObjects.length; i++) {

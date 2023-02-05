@@ -15,5 +15,6 @@ export default class Background extends GameObject {
         else if(this.y-camera.y>ctx.canvas.height) {
             this.y-=ctx.canvas.height*2;
         }
+        
     }
 }

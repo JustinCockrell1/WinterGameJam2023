@@ -6,6 +6,10 @@ export default class Rock extends GameObject {
     // }
 
     tick() {
-        
+
+    }
+
+    render(ctx, camera) {
+
     }
 }
