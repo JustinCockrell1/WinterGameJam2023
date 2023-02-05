@@ -6,7 +6,7 @@ export default class Ice extends GameObject{
         super(x, y);
         this.w = 0;
         this.h = 0;
-        this.speed = 50;
+        this.speed = 125;
         this.animation = new Animation("./assets/images/ice.png");
 
         this.type = "ice";
