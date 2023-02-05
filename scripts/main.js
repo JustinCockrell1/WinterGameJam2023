@@ -7,6 +7,7 @@ let ballX = 10;
 let ballY = 10;
 let ballAngle = 1;
 let root = new Root(200,200);
+let gameRunning = false;
 
 window.addEventListener("gamepadconnected", (e) => {
     gamePadIndex = e.gamepad.index;
@@ -46,6 +47,9 @@ let lastTotalElapsedTime = 0;
     if(gamePadIndex!=-1) {
         const gamePad = navigator.getGamepads()[gamePadIndex];
         // console.log(gamePad.axes[0], gamePad.axes[1]);
+        if(gamePad.buttons[0].pressed) gameRunning=true;
+
+        if(gameRunning)
         root.tick(elapsedTime, gamePad);
         //Get the angle of the controller
   

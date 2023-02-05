@@ -1,5 +1,6 @@
 import GameObject from "./GameObject.js";
 import {wrapTo360} from "./AngleHelper.js";
+import Camera from "./Camera.js";
 
 export default class Root extends GameObject {
 
@@ -7,10 +8,6 @@ export default class Root extends GameObject {
         super(x, y);
         this.angle = 180;
         this.speed = 200;
-    }
-
-    getChange(a1, a2) {
-
     }
 
     tick(elapsedTime, gamePad) {
