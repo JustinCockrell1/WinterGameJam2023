@@ -7,10 +7,8 @@ export default class Refresh extends GameObject {
     }
 
     render(ctx){
-        this.animation.render(ctx,this.x,this.y,ctx.canvas.width,ctx.canvas.height);
-        ctx.fillStyle="white";
-        ctx.font="60px Serif"
-        ctx.fillText("Depth:" + Math.round(this.y/100)+2, (ctx.canvas.width/2)-150,ctx.canvas.height/4.1);
+        // this.animation.render(ctx,this.x,this.y,ctx.canvas.width,ctx.canvas.height);
+   
 
     }
 }

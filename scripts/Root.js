@@ -14,7 +14,8 @@ export default class Root extends GameObject {
         this.h=15;
 
         this.parts = [];
-        this.numParts = 100;
+        this.numParts = 2000;
+        this.partsLength = 0;
         this.animation = new Animation("./assets/images/Root.png");
         console.log(this.y, this.x);
         this.type="root";
@@ -68,21 +69,23 @@ export default class Root extends GameObject {
         document.getElementById("vy").innerHTML = vy;
        
     
-        this.parts.push({x:this.x, y:this.y});
+        this.parts[this.partsLength] = {x:this.x, y:this.y};
+        this.partsLength++;
+        if(this.partsLength>this.numParts) this.partsLength = 0;
         this.x+=(vx * elapsedTime) * this.speed;
         this.y+=(vy * elapsedTime) * this.speed;
 
         if(this.x < 0){
             this.x=0;
-            this.angle=90;
+            // this.angle=90;
         }else{}
         if (this.x + this.w > game.ctx.canvas.width){
             this.x = game.ctx.canvas.width - this.w;
-            this.angle=90;
+            // this.angle=90;
         }else{}
 
-        this.saturation-=.0025;
-        // console.log(this.saturation);
+        this.saturation-=.25*elapsedTime;
+        console.log(this.saturation);
         if(this.saturation<0){
             // game over
             this.gameOver(game);
@@ -101,6 +104,10 @@ export default class Root extends GameObject {
             // ctx.fillRect(this.parts[i].x, this.parts[i].y, 15, 15);
             this.animation.render(ctx,this.parts[i].x,this.parts[i].y-camera.y,this.w,this.h);
         }
+        ctx.fillStyle="white";
+        ctx.font="15px Serif"
+        ctx.fillText(`Saturation: ${Math.round(this.saturation*100)/100}`, 200, 30);
+
     }
 
 
@@ -125,5 +132,11 @@ export default class Root extends GameObject {
             game.gameOver = true;
             const refresh = new Refresh(0,0);
             refresh.render(game.ctx);
+            game.ctx.fillStyle = "rgba(0,0,0,0.5)";
+            game.ctx.fillRect(0,0,game.ctx.canvas.width,game.ctx.canvas.height);
+            game.ctx.fillStyle="white";
+            game.ctx.font="60px Serif"
+            game.ctx.fillText("Depth:" + Math.round(this.y/100)+2, (game.ctx.canvas.width/2)-150,300);
+            game.ctx.fillText("Game Over!", game.ctx.canvas.width/2-150, 100);
     }
 }
