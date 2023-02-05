@@ -47,6 +47,11 @@ export default class DigDownRoot {
             // console.log(gp.buttons);
           });
 
+          window.addEventListener("resize", (e)=>{
+            this.ctx.canvas.width = window.innerHeight-20;
+            this.ctx.canvas.height = window.innerHeight-20;
+          })
+
           window.addEventListener("gamepaddisconnected", (e) => {
             console.log("Gamepad disconnected from index %d: %s",
               e.gamepad.index, e.gamepad.id);
