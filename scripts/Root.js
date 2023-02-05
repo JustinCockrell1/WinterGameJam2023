@@ -19,7 +19,7 @@ export default class Root extends GameObject {
         this.animation = new Animation("./assets/images/Root.png");
         console.log(this.y, this.x);
         this.type="root";
-        this.saturation = 2;
+        this.saturation = 4;
     }
 
     tick(elapsedTime, gamePad, game) {
