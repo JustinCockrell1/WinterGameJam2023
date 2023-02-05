@@ -1,11 +1,12 @@
 export default class Animation {
-    constructor(img) {
+    constructor(path) {
         this.img = new Image();
-        this.img.src = img;
+        this.img.src = path;
     }
 
-    render(ctx) {
-        ctx.drawImage(this.img, this.x, this.y)
+    render(ctx, x, y) {
+        ctx.drawImage(this.img, x, y);
+
     }
     
 }
