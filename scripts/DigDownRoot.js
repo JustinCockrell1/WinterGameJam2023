@@ -151,8 +151,8 @@ let gamePad = {buttons:[], axes:[]};
 
                 //collisions
                 for(let i = 0; i < this.gameObjects.length;i++) {
-                    for(let j = i; j < this.gameObjects.length; j++) {
-                        if(i!=j&&
+                    for(let j = i+1; j < this.gameObjects.length; j++) {
+                        if(
                             this.gameObjects[i].x+this.gameObjects[i].w >= this.gameObjects[j].x &&
                             this.gameObjects[j].x+this.gameObjects[j].w >= this.gameObjects[i].x &&
                             this.gameObjects[i].y+this.gameObjects[i].h >= this.gameObjects[j].y &&
