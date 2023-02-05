@@ -2,12 +2,16 @@ import GameObject from "./GameObject.js";
 import {wrapTo360} from "./AngleHelper.js";
 import Camera from "./Camera.js";
 import Animation from "./Animation.js";
+import Refresh from "./Refresh.js";
 
 export default class Root extends GameObject {
     constructor(x, y) {
         super(x, y);
         this.angle = 90;
         this.speed = 200;
+
+        this.w=15;
+        this.h=15;
 
         this.parts = [];
         this.numParts = 100;
@@ -17,7 +21,7 @@ export default class Root extends GameObject {
         this.saturation = 2;
     }
 
-    tick(elapsedTime, gamePad) {
+    tick(elapsedTime, gamePad, game) {
         let vx = gamePad.axes[0];
         let vy = gamePad.axes[1];
         let pressed = Math.abs(vx) > 0.05 || Math.abs(vy) > 0.05;
@@ -49,7 +53,7 @@ export default class Root extends GameObject {
         document.getElementById("ballAngle").innerHTML = this.angle;
 
         // console.log(vx, vy, change, angle, ballAngle);
-        //update the player angle
+        // update the player angle
         if(pressed) {
         this.angle+=(change/50);
         // this.angle = cAngle;
@@ -68,8 +72,22 @@ export default class Root extends GameObject {
         this.x+=(vx * elapsedTime) * this.speed;
         this.y+=(vy * elapsedTime) * this.speed;
 
-        this.saturation-=.003;
-        console.log(this.saturation);
+        if(this.x < 0){
+            this.x=0;
+            this.angle=90;
+        }else{}
+        if (this.x + this.w > game.ctx.canvas.width){
+            this.x = game.ctx.canvas.width - this.w;
+            this.angle=90;
+        }else{}
+
+        this.saturation-=.0025;
+        // console.log(this.saturation);
+        if(this.saturation<0){
+            // game over
+            this.gameOver(game);
+        }
+
 
 
         
@@ -78,10 +96,10 @@ export default class Root extends GameObject {
     render(ctx, camera) {
         ctx.fillStyle = "red";
         // ctx.fillRect(this.x, this.y, 15, 15);
-        this.animation.render(ctx,this.x,this.y-camera.y,15, 15)
+        this.animation.render(ctx,this.x,this.y-camera.y,this.w, this.h)
         for(let i = 0; i < this.parts.length; i++) {
             // ctx.fillRect(this.parts[i].x, this.parts[i].y, 15, 15);
-            this.animation.render(ctx,this.parts[i].x,this.parts[i].y-camera.y,15,15);
+            this.animation.render(ctx,this.parts[i].x,this.parts[i].y-camera.y,this.w,this.h);
         }
     }
 
@@ -89,14 +107,23 @@ export default class Root extends GameObject {
     collision(object, game) {
         console.log("root hit ", object.type);
         if(object.type=="rock") {
-            this.x = 500;
-            this.y=0;
-            this.parts = [];
+            this.gameOver(game);
         }
         else if(object.type=="water") {
+            if(object.full==true){
+                this.saturation+=1;
+                object.full=false;
+
+                // console.log(game.gameSpeed);
+                // game.gameSpeed = 0.1;
+            }else{}
             
-            console.log(game.gameSpeed);
-            game.gameSpeed = 0.1;
         }
+    }
+    gameOver(game){
+            game.gameRunning = false;
+            game.gameOver = true;
+            const refresh = new Refresh(0,0);
+            refresh.render(game.ctx);
     }
 }

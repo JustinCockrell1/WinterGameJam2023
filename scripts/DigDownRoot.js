@@ -13,6 +13,8 @@ export default class DigDownRoot {
     constructor() {
         this.gameRunning = false;
 
+        this.gameOver = false;
+
         this.gameObjects = [];
 
         this.gamePadIndex = -1;
@@ -102,7 +104,10 @@ export default class DigDownRoot {
         this.lastTotalElapsedTime = totalElapsedTime;
         elapsedTime*=this.gameSpeed;
         this.tick(elapsedTime);
-        this.render(this.ctx);
+        if(!this.gameOver){
+            this.render(this.ctx);
+        }
+        
     
         window.requestAnimationFrame((totalElapsedTime)=>this.gameLoop(totalElapsedTime));
       }
@@ -122,6 +127,7 @@ export default class DigDownRoot {
         this.addGameObject(new Title(0,0));
 
         this.gameRunning=false;
+        this.gameOver=false;
         window.requestAnimationFrame((elapsedTime)=>{this.gameLoop(elapsedTime)});
       
       }
@@ -142,11 +148,15 @@ export default class DigDownRoot {
         }
         // console.log(gamePad.buttons[0]);
         // console.log(this.keyAPressed);
-            if(gamePad.buttons[0].pressed===true) this.gameRunning=true;
+            if(gamePad.buttons[0].pressed===true) {
+                this.gameRunning=true;
+                this.gameOver=false;
+            }
+
     
             if(this.gameRunning) {
                 for(let i = 0; i < this.gameObjects.length; i++) {
-                    this.gameObjects[i].tick(elapsedTime, gamePad);
+                    this.gameObjects[i].tick(elapsedTime, gamePad, this);
                     if(this.gameObjects[i].type=="root") {
                         this.camera.y = this.gameObjects[i].y-(this.ctx.canvas.height/2);
                     }
@@ -170,6 +180,8 @@ export default class DigDownRoot {
                 }
       
               
+            } else {
+                
             }
        
      
