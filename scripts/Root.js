@@ -20,6 +20,8 @@ export default class Root extends GameObject {
         let vy = gamePad.axes[1];
         let pressed = Math.abs(vx) > 0.05 || Math.abs(vy) > 0.05;
 
+        
+
         let cAngle = Math.atan2(vy,vx)*180/Math.PI
         if(cAngle<0) {
             cAngle=360+cAngle;
@@ -65,6 +67,11 @@ export default class Root extends GameObject {
 
         this.x+=(vx * elapsedTime) * this.speed;
         this.y+=(vy * elapsedTime) * this.speed;
+
+        // Wall Collision
+        if(this.x < 0 ||this.x > ctx.canvas.width){
+            // Game over screen
+        }
     }
 
     render(ctx, camera) {

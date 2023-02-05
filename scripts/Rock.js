@@ -1,4 +1,5 @@
-import GameObject from "./GameObject";
+import GameObject from "./GameObject.js";
+import Animation from "./Animation.js";
 
 export default class Rock extends GameObject {
     // constructor(x, y) {
@@ -7,5 +8,9 @@ export default class Rock extends GameObject {
 
     tick() {
         
+    }
+
+    render() {
+        // this.animation.render(ctx,)
     }
 }
