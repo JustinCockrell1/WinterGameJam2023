@@ -14,6 +14,7 @@ export default class Root extends GameObject {
         this.animation = new Animation("./assets/images/Root.png");
         console.log(this.y, this.x);
         this.type="root";
+        this.saturation = 2;
     }
 
     tick(elapsedTime, gamePad) {
@@ -67,8 +68,8 @@ export default class Root extends GameObject {
         this.x+=(vx * elapsedTime) * this.speed;
         this.y+=(vy * elapsedTime) * this.speed;
 
-
-
+        this.saturation-=.003;
+        console.log(this.saturation);
 
 
         
@@ -91,6 +92,9 @@ export default class Root extends GameObject {
             this.x = 500;
             this.y=0;
             this.parts = [];
+        }
+        else if(object.type=="water") {
+            
         }
     }
 }

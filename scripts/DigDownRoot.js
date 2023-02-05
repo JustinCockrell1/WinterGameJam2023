@@ -110,13 +110,13 @@ export default class DigDownRoot {
       
         this.addGameObject(new Background(0,this.ctx.canvas.height));
         this.addGameObject(new Background(0,this.ctx.canvas.height*2));
-        this.addGameObject(new Title(0,0));
 
         for(let i = 0; i < 20; i++) {
         this.addGameObject(new Rock(Math.random()*600, Math.random()*1000+1000));
         this.addGameObject(new Water(Math.random()*600, Math.random()*1000+1000));
         }
         this.addGameObject(new Root(this.ctx.canvas.width/2,this.ctx.canvas.height/2));
+        this.addGameObject(new Title(0,0));
 
         this.gameRunning=false;
         window.requestAnimationFrame((elapsedTime)=>{this.gameLoop(elapsedTime)});
