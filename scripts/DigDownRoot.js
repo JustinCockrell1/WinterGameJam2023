@@ -116,8 +116,8 @@ export default class DigDownRoot {
       
       startGame() {
 
-        this.myMusic = new Sound("./assets/sounds/ingamemusic.mp3");
-        this.myMusic.play();
+        // this.myMusic = new Sound("./assets/sounds/ingamemusic.mp3");
+        // this.myMusic.play();
       
         this.addGameObject(new Background(0,this.ctx.canvas.height));
         this.addGameObject(new Background(0,this.ctx.canvas.height*2));
