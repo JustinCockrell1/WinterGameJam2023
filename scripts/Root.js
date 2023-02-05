@@ -7,7 +7,7 @@ export default class Root extends GameObject {
 
     constructor(x, y) {
         super(x, y);
-        this.angle = 180;
+        this.angle = 90;
         this.speed = 200;
 
         this.parts = [];
@@ -67,13 +67,13 @@ export default class Root extends GameObject {
         this.y+=(vy * elapsedTime) * this.speed;
     }
 
-    render(ctx) {
+    render(ctx, camera) {
         ctx.fillStyle = "red";
         // ctx.fillRect(this.x, this.y, 15, 15);
-        this.animation.render(ctx,this.x,this.y,15, 15)
+        this.animation.render(ctx,this.x,this.y-camera.y,15, 15)
         for(let i = 0; i < this.parts.length; i++) {
             // ctx.fillRect(this.parts[i].x, this.parts[i].y, 15, 15);
-            this.animation.render(ctx,this.parts[i].x,this.parts[i].y,15,15)
+            this.animation.render(ctx,this.parts[i].x,this.parts[i].y-camera.y,15,15);
         }
     }
 }

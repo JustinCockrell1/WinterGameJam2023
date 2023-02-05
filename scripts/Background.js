@@ -6,7 +6,14 @@ export default class Background extends GameObject {
         this.animation= new Animation("./assets/images/dirt1.png")
     }
 
-    render(ctx){
-        this.animation.render(ctx,this.x,this.y,ctx.canvas.width,ctx.canvas.height);
+    render(ctx, camera){
+        // let y = this.y-(camera.y%ctx.canvas.height);
+        this.animation.render(ctx,this.x,this.y-camera.y,ctx.canvas.width,ctx.canvas.height);
+        if(this.y-camera.y<-ctx.canvas.height) {
+            this.y+=ctx.canvas.height*2;
+        }
+        else if(this.y-camera.y>ctx.canvas.height) {
+            this.y-=ctx.canvas.height*2;
+        }
     }
 }

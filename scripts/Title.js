@@ -6,7 +6,7 @@ export default class Title extends GameObject {
         this.animation = new Animation("./assets/images/title1.png")
     }
 
-    render(ctx){
-        this.animation.render(ctx,this.x,this.y,ctx.canvas.width,ctx.canvas.height);
+    render(ctx, camera){
+        this.animation.render(ctx,this.x,this.y-camera.y,ctx.canvas.width,ctx.canvas.height);
     }
 }
