@@ -1,6 +1,7 @@
 import GameObject from "./GameObject.js";
 import {wrapTo360} from "./AngleHelper.js";
 import Camera from "./Camera.js";
+import Animation from "./Animation.js";
 
 export default class Root extends GameObject {
 
@@ -11,6 +12,7 @@ export default class Root extends GameObject {
 
         this.parts = [];
         this.numParts = 100;
+        this.animation = new Animation("./assets/images/Root.png")
     }
 
     tick(elapsedTime, gamePad) {
@@ -67,9 +69,11 @@ export default class Root extends GameObject {
 
     render(ctx) {
         ctx.fillStyle = "red";
-        ctx.fillRect(this.x, this.y, 15, 15);
+        // ctx.fillRect(this.x, this.y, 15, 15);
+        this.animation.render(ctx,this.x,this.y,15, 15)
         for(let i = 0; i < this.parts.length; i++) {
-            ctx.fillRect(this.parts[i].x, this.parts[i].y, 15, 15);
+            // ctx.fillRect(this.parts[i].x, this.parts[i].y, 15, 15);
+            this.animation.render(ctx,this.parts[i].x,this.parts[i].y,15,15)
         }
         console.log(this.parts.length);
     }

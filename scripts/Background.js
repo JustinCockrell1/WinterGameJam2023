@@ -7,6 +7,6 @@ export default class Background extends GameObject {
     }
 
     render(ctx){
-        this.animation.render(ctx,this.x,this.y);
+        this.animation.render(ctx,this.x,this.y,ctx.canvas.width,ctx.canvas.height);
     }
 }
