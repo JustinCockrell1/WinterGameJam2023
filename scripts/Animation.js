@@ -4,8 +4,8 @@ export default class Animation {
         this.img.src = path;
     }
 
-    render(ctx, x, y) {
-        ctx.drawImage(this.img, x, y);
+    render(ctx, x, y, w, h,) {
+        ctx.drawImage(this.img, x, y, w, h);
 
     }
     
