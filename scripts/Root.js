@@ -118,7 +118,7 @@ export default class Root extends GameObject {
         }
         else if(object.type=="water") {
             if(object.full==true){
-                this.saturation+=1;
+                this.saturation+=0.5;
                 object.full=false;
 
                 // console.log(game.gameSpeed);
