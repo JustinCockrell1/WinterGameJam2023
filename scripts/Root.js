@@ -16,6 +16,7 @@ export default class Root extends GameObject {
         this.parts = [];
         this.numParts = 2000;
         this.partsLength = 0;
+        this.sound = new Audio("./assets/sounds/ingamemusic.mp3")
         this.animation = new Animation("./assets/images/Root.png");
         console.log(this.y, this.x);
         this.type="root";
@@ -26,6 +27,8 @@ export default class Root extends GameObject {
         let vx = gamePad.axes[0];
         let vy = gamePad.axes[1];
         let pressed = Math.abs(vx) > 0.05 || Math.abs(vy) > 0.05;
+
+        this.sound.play();
 
         let cAngle = Math.atan2(vy,vx)*180/Math.PI
         if(cAngle<0) {
@@ -131,6 +134,8 @@ export default class Root extends GameObject {
         }
     }
     gameOver(game){
+            
+            this.sound.pause();
             game.gameRunning = false;
             game.gameOver = true;
             const refresh = new Refresh(0,0);

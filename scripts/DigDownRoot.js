@@ -21,6 +21,7 @@ export default class DigDownRoot {
 
         this.gamePadIndex = -1;
 
+        this.sound = new Audio("./assets/sounds/TitleMusic.mp3");
 
         this.lastTotalElapsedTime = 0;
 
@@ -120,10 +121,7 @@ export default class DigDownRoot {
       }
       
       startGame() {
-
-        // this.myMusic = new Sound("./assets/sounds/ingamemusic.mp3");
-        // this.myMusic.play();
-      
+        
         this.addGameObject(new Background(0,this.ctx.canvas.height));
         this.addGameObject(new Background(0,this.ctx.canvas.height*2));
         this.addGameObject(new Ice(0,0));
@@ -149,7 +147,7 @@ export default class DigDownRoot {
     
 
     tick(elapsedTime) {
-
+        // this.sound.play();
         let gamePad = {buttons:[], axes:[]};
         if(this.gamePadIndex!=-1) {
             gamePad = navigator.getGamepads()[this.gamePadIndex];
